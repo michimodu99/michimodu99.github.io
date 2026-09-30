@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Michele Modugno · Projects</title>
-<meta name="description" content="Management engineer building web apps that turn real processes into software. Projects: PrendiNota, Cucinança.">
+<meta name="description" content="Web apps by Michele Modugno, management engineer: PrendiNota and Cucinança.">
 <meta property="og:title" content="Michele Modugno · Projects">
-<meta property="og:description" content="Management engineer building web apps that turn real processes into software.">
+<meta property="og:description" content="Web apps by Michele Modugno, management engineer: PrendiNota and Cucinança.">
 <meta property="og:image" content="https://michimodu99.github.io/img/prendinota.webp">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23111'/><text x='16' y='22' font-family='Georgia,serif' font-size='17' fill='%23fff' text-anchor='middle'>MM</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,16 +91,15 @@ footer a:hover{color:var(--text)}
     <a class="mark" href="#">Michele Modugno</a>
     <nav>
       <a href="#projects">Projects</a>
-      <a class="hide-sm" href="#approach">Approach</a>
       <a href="https://github.com/michimodu99">GitHub</a>
       <button class="theme" id="theme" aria-label="Toggle dark mode">◐</button>
     </nav>
   </header>
 
   <div class="hero">
-    <h1>I turn <em>processes</em> into software people use.</h1>
-    <p>I'm a management engineer (BSc) doing an MSc in Operations Management. I build web apps end to end: first I model the process, then the data and its rules, then the product.</p>
-    <p>Here are the ones I've shipped.</p>
+    <h1>Management engineer who <em>builds web apps.</em></h1>
+    <p>I'm Michele. I have a BSc in Management Engineering and I'm now doing an MSc in Operations Management. Before writing any code I model the process (BPMN, UML) and the database.</p>
+    <p>Below are the two projects I've finished so far.</p>
     <div class="meta">
       <span class="chip">BSc Management Engineering</span>
       <span class="chip">MSc Operations Management, in progress</span>
@@ -109,7 +108,7 @@ footer a:hover{color:var(--text)}
   </div>
 
   <section id="projects">
-    <p class="eyebrow">Selected projects</p>
+    <p class="eyebrow">Projects</p>
 
     <article class="project">
       <div class="shots">
@@ -124,13 +123,13 @@ footer a:hover{color:var(--text)}
         <h2>PrendiNota</h2>
         <p class="tagline">A booking platform for music rehearsal rooms in the province of Bari.</p>
         <dl>
-          <div><dt>Problem</dt><dd>Rehearsal studios take bookings by phone and chat: double bookings, no-shows, no payment up front.</dd></div>
-          <div><dt>Approach</dt><dd>Requirements for three roles, then BPMN and UML models of the booking process, an ER model, and finally the app. The rules that must never break (no overlaps, opening hours, closures) are enforced by PostgreSQL triggers, not just by the code.</dd></div>
+          <div><dt>Problem</dt><dd>Bands need an equipped rehearsal room at a given hour. Studios want their rooms booked and paid for without handling every request themselves.</dd></div>
+          <div><dt>Approach</dt><dd>Requirements for three roles, BPMN and UML models of the booking process, an ER model, then the app. PostgreSQL triggers enforce the rules that must never break (no overlapping bookings, opening hours, closure days), so the database rejects bad data even if the app misses a check.</dd></div>
           <div><dt>Result</dt><dd>A working platform: slot search, Stripe test payments, QR check-in, a wallet with a 24h refund/penalty policy, unpaid bookings released after 15 minutes, and admin approval of studios.</dd></div>
         </dl>
         <ul class="stack"><li>PHP 8 · CodeIgniter 4</li><li>PostgreSQL · PL/pgSQL</li><li>Stripe</li><li>BPMN · UML · ER</li></ul>
         <div class="links">
-          <a class="btn primary" href="https://github.com/michimodu99/prendinota">View code &amp; docs →</a>
+          <a class="btn primary" href="https://github.com/michimodu99/prendinota">View code and docs</a>
         </div>
       </div>
     </article>
@@ -144,27 +143,19 @@ footer a:hover{color:var(--text)}
         <h2>Cucinança</h2>
         <p class="tagline">"What's in my fridge?" A recipe book for Erasmus students in Bragança.</p>
         <dl>
-          <div><dt>Problem</dt><dd>Students abroad cook with whatever is left in the fridge, local ingredients and a tight budget.</dd></div>
-          <div><dt>Approach</dt><dd>A matching engine: you enter your pantry and it ranks recipes you can cook tonight, accepting sensible substitutes but never dropping a dish's key ingredient. The data model has an ingredient taxonomy and a JSON schema, and a validator checks every recipe.</dd></div>
-          <div><dt>Result</dt><dd>126 recipes and 160 ingredients, portions for one person, local prices. Static site on GitHub Pages, no backend; the pantry is saved on the device.</dd></div>
+          <div><dt>Problem</dt><dd>Erasmus students cook with whatever is left in the fridge, and with what the shops in Bragança sell.</dd></div>
+          <div><dt>Approach</dt><dd>You enter your pantry and a matching engine lists the recipes you can cook tonight. It accepts a substitute where the recipe allows one, but a dish missing its main ingredient is never suggested. Recipes follow a JSON schema over an ingredient taxonomy, and a validator checks each one.</dd></div>
+          <div><dt>Result</dt><dd>126 recipes and 160 ingredients, portions for one person, local prices. It is a static site on GitHub Pages with no backend, and the pantry is saved on the device.</dd></div>
         </dl>
         <ul class="stack"><li>JavaScript (ES modules)</li><li>JSON Schema</li><li>Node test runner</li><li>GitHub Pages</li></ul>
         <div class="links">
-          <a class="btn primary" href="https://michimodu99.github.io/cucinanca/">Open the app →</a>
+          <a class="btn primary" href="https://michimodu99.github.io/cucinanca/">Open the app</a>
           <a class="btn" href="https://github.com/michimodu99/cucinanca">Code</a>
         </div>
       </div>
     </article>
   </section>
 
-  <section id="approach" style="border-top:1px solid var(--line)">
-    <p class="eyebrow">How I work</p>
-    <div class="skills">
-      <div><h3>Process first</h3><p>BPMN, UML and use cases before any code. If the process is unclear, the software will be too.</p></div>
-      <div><h3>Data with rules</h3><p>Relational modelling (ER → logical → physical), constraints and triggers so the data can't go wrong.</p></div>
-      <div><h3>Ship it</h3><p>Full-stack web apps (PHP/CodeIgniter, PostgreSQL, JavaScript) that real people actually use.</p></div>
-    </div>
-  </section>
 
   <footer>
     <div class="row">
