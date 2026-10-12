@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cucinança si è spostata</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://cucinanca.pages.dev/">
+  <script>
+    // Cucinança ora vive su cucinanca.pages.dev. Un link condiviso (#/?i=…) passa così com'è;
+    // altrimenti la dispensa salvata qui (stesso indirizzo di prima) viaggia nel link, perché
+    // il nuovo indirizzo ha una memoria sua, vuota.
+    (function () {
+      var nuovo = 'https://cucinanca.pages.dev/';
+      var dest = nuovo + location.hash;
+      if (!location.hash) {
+        try {
+          var d = JSON.parse(localStorage.getItem('cucinanca:dispensa') || 'null');
+          if (d && Array.isArray(d.i) && d.i.length) dest = nuovo + '#/?' + new URLSearchParams({ i: d.i.join(',') });
+        } catch (e) {}
+      }
+      location.replace(dest);
+    })();
+  </script>
+  <style>
+    body { font: 18px/1.5 system-ui, sans-serif; margin: 0; min-height: 100vh; display: grid; place-items: center; background: #fff; color: #111; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <p>Cucinança si è spostata su <a href="https://cucinanca.pages.dev/">cucinanca.pages.dev</a>.</p>
+</body>
+</html>
