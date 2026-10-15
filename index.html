@@ -27,7 +27,7 @@
     </ul>
   </nav>
 
-  <h1 class="titolo-grande"><span class="riga">Ingegnere</span> <span class="riga">gestionale.</span></h1>
+  <h1 class="titolo-grande"><span class="riga"><span>Ingegnere</span></span> <span class="riga"><span>gestionale.</span></span></h1>
 
   <div class="campo__corpo">
     <p class="frase">Ti insegno a costruire il tuo primo software gestionale.</p>
@@ -53,9 +53,9 @@
 
 <main id="contenuto">
   <section id="progetti" class="sezione" aria-labelledby="titolo-progetti">
-    <h2 id="titolo-progetti" class="titolo-sezione lineetta">Progetti</h2>
+    <h2 id="titolo-progetti" class="titolo-sezione lineetta" data-entra>Progetti</h2>
     <ul class="pannelli">
-      <li class="pannello pannello--largo">
+      <li data-entra class="pannello pannello--largo">
         <div class="pannello__testo">
           <h3 class="pannello__nome"><a href="/progetti/prendinota/">PrendiNota</a></h3>
           <p>Prenotare una sala prove, dal processo al codice.</p>
@@ -71,7 +71,7 @@
             alt="PrendiNota da telefono: il catalogo degli studi di sala prove">
         </div>
       </li>
-      <li class="pannello pannello--sette">
+      <li data-entra class="pannello pannello--sette">
         <div class="pannello__testo">
           <h3 class="pannello__nome"><a href="/progetti/cucinanca/">Cucinança</a></h3>
           <p>Cosa cucino stasera con quello che ho in frigo?</p>
@@ -84,7 +84,7 @@
             alt="Cucinança da telefono: le ricette che si possono fare con il frigo di esempio, in testa l’omelette">
         </div>
       </li>
-      <li class="pannello pannello--cinque">
+      <li data-entra class="pannello pannello--cinque">
         <div class="pannello__testo">
           <h3 class="pannello__nome"><a href="/progetti/quizzettino/">Quizzettino</a></h3>
           <p>Indovina il calciatore misterioso ricostruendo la catena dei suoi club.</p>
@@ -97,7 +97,7 @@
             alt="Quizzettino da telefono: una partita in corso con la catena Padova, Juventus, Fiorentina">
         </div>
       </li>
-      <li class="pannello pannello--fascia">
+      <li data-entra class="pannello pannello--fascia">
         <div class="pannello__testo">
           <h3 class="pannello__nome"><a href="/progetti/michifit/">MichiFit</a></h3>
           <p>La mia scheda di palestra, senza le note del telefono.</p>
@@ -113,15 +113,15 @@
     </ul>
   </section>
   <section id="mentoring" class="sezione mentoring" aria-labelledby="titolo-mentoring">
-    <h2 id="titolo-mentoring" class="titolo-sezione lineetta">Mentoring per Sistemi Informativi</h2>
+    <h2 id="titolo-mentoring" class="titolo-sezione lineetta" data-entra>Mentoring per Sistemi Informativi</h2>
     <div class="mentoring__intro">
-      <p class="frase">Ho dato Sistemi Informativi nel 2025/26. Ti accompagno a fare il tuo progetto.</p>
-      <p>Ho preso 30 e lode con PrendiNota, un progetto completo dai requisiti al codice. Nel mio anno, il 2025/26, per puntare al massimo il progetto andava strutturato in MVC. Ti aiuto a capire come si fa, e a farlo tu.</p>
+      <p class="frase" data-entra>Ho dato Sistemi Informativi nel 2025/26. Ti accompagno a fare il tuo progetto.</p>
+      <p data-entra>Ho preso 30 e lode con PrendiNota, un progetto completo dai requisiti al codice. Nel mio anno, il 2025/26, per puntare al massimo il progetto andava strutturato in MVC. Ti aiuto a capire come si fa, e a farlo tu.</p>
     </div>
 
     <ol class="percorso" data-percorso aria-label="Il percorso, tappa per tappa">
       <li class="tappa tappa--inizio">
-        <button type="button" aria-expanded="true" aria-controls="pezzo-incontro"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Primo incontro gratuito</span></button>
+        <button type="button" data-entra aria-expanded="true" aria-controls="pezzo-incontro"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Primo incontro gratuito</span></button>
         <div class="pezzo" id="pezzo-incontro">
           <div class="nuvoletta" data-ui>
             <p>Ciao Michele, ho visto il tuo sito. Sto preparando Sistemi Informativi e vorrei fissare il primo incontro gratuito.</p>
@@ -129,7 +129,7 @@
         </div>
       </li>
       <li class="tappa tappa--attivita">
-        <button type="button" aria-expanded="false" aria-controls="pezzo-processi"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Requisiti e processi</span></button>
+        <button type="button" data-entra aria-expanded="false" aria-controls="pezzo-processi"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Requisiti e processi</span></button>
         <div class="pezzo" id="pezzo-processi">
           <a class="diagramma" href="/img/prendinota/bpmn-prenotazione.webp">
             <img src="/img/prendinota/bpmn-prenotazione-anteprima.webp" width="1800" height="636" loading="lazy"
@@ -140,7 +140,7 @@
         </div>
       </li>
       <li class="tappa tappa--attivita">
-        <button type="button" aria-expanded="false" aria-controls="pezzo-database"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Database</span></button>
+        <button type="button" data-entra aria-expanded="false" aria-controls="pezzo-database"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Database</span></button>
         <div class="pezzo" id="pezzo-database">
           <a class="diagramma" href="/img/prendinota/er.webp">
             <img src="/img/prendinota/er-anteprima.webp" width="1800" height="1431" loading="lazy"
@@ -151,7 +151,7 @@
         </div>
       </li>
       <li class="tappa tappa--attivita">
-        <button type="button" aria-expanded="false" aria-controls="pezzo-mvc"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Architettura MVC</span></button>
+        <button type="button" data-entra aria-expanded="false" aria-controls="pezzo-mvc"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Architettura MVC</span></button>
         <div class="pezzo" id="pezzo-mvc">
           <a class="diagramma" href="/img/prendinota/classi.webp">
             <img src="/img/prendinota/classi-anteprima.webp" width="1800" height="1220" loading="lazy"
@@ -162,7 +162,7 @@
         </div>
       </li>
       <li class="tappa tappa--fine">
-        <button type="button" aria-expanded="false" aria-controls="pezzo-orale"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Relazione e orale</span></button>
+        <button type="button" data-entra aria-expanded="false" aria-controls="pezzo-orale"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Relazione e orale</span></button>
         <div class="pezzo" id="pezzo-orale">
           <img class="libretto" src="/img/libretto/libretto-30-lode.webp" width="1869" height="291" loading="lazy"
             alt="Estratto del libretto: Sistemi Informativi, anno accademico 2025/26, voto 30 e lode">
@@ -174,13 +174,13 @@
 </main>
 
 <footer id="contatti" class="campo chiusura">
-  <p class="chiusura__nome">Michele Modugno</p>
-  <ul class="chiusura__link">
+  <p class="chiusura__nome" data-entra>Michele Modugno</p>
+  <ul class="chiusura__link" data-entra>
     <li><a class="pulsante" href="https://wa.me/393209552840?text=Ciao%20Michele%2C%20ho%20visto%20il%20tuo%20sito.%20Sto%20preparando%20Sistemi%20Informativi%20e%20vorrei%20fissare%20il%20primo%20incontro%20gratuito.">Scrivimi su WhatsApp</a></li>
     <li><a class="link-forte" href="mailto:michelemodugno99@gmail.com">Scrivimi per email</a></li>
     <li><a class="link-forte" href="/privacy/">Privacy</a></li>
   </ul>
-  <p class="chiusura__firma piccolo">© 2026 Michele Modugno</p>
+  <p class="chiusura__firma piccolo" data-entra>© 2026 Michele Modugno</p>
 </footer>
 </body>
 </html>

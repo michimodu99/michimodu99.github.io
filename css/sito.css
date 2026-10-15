@@ -711,3 +711,95 @@ main { position: relative; }
   .risultato .libretto { grid-column: 7 / span 6; }
   .inviti { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* ===== Movimento (spec §8). Solo transform, opacity e clip-path. Gli stati nascosti valgono
+   solo sotto .js e senza movimento ridotto: altrimenti la pagina è quella ferma. ===== */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --t-press: 140ms;
+  --t-hover: 180ms;
+  --t-ui: 240ms;
+}
+
+/* Maschera delle righe del titolo della home (ferma, serve solo all'entrata) */
+.titolo-grande .riga { overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.titolo-grande .riga > span { display: block; }
+
+/* Risposta ai comandi: pressione dei pulsanti */
+.pulsante { transition: transform var(--t-press) var(--ease-out); }
+.pulsante:active { transform: scale(0.97); }
+
+/* La scritta dei pulsanti esce in alto e una copia identica entra dal basso (spunto da 21st.dev) */
+.scritta { display: inline-grid; overflow: hidden; }
+.scritta > span { grid-area: 1 / 1; transition: transform var(--t-ui) var(--ease-out); }
+.scritta > [aria-hidden] { transform: translateY(110%); }
+@media (prefers-reduced-motion: no-preference) {
+  .pulsante:focus-visible .scritta > span { transform: translateY(-110%); }
+  .pulsante:focus-visible .scritta > [aria-hidden] { transform: none; }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .pulsante:hover .scritta > span { transform: translateY(-110%); }
+  .pulsante:hover .scritta > [aria-hidden] { transform: none; }
+}
+
+/* Il tratto del flusso si colora una tappa dopo l'altra, come il token che passa */
+.tappa:not(:last-child)::before,
+.tappa:not(:last-child)::after,
+.tappa:not(:last-child) > button::before,
+.tappa:not(:last-child) > button::after {
+  transition: background-color 300ms ease;
+  transition-delay: calc(var(--i) * 70ms);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Le parti delle sezioni entrano quando arrivano, sfalsate da --n (lo mette lo script) */
+  .js [data-entra] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 600ms var(--ease-out), transform 800ms var(--ease-out);
+    transition-delay: calc(var(--n, 0) * 80ms);
+  }
+  .js [data-entra].is-in { opacity: 1; transform: none; }
+
+  /* Home: il titolo sale dalla sua riga, la seconda 110 ms dopo; poi frase, testo e pulsante; le schermate salgono insieme */
+  .js .campo--home .riga > span { animation: riga-su 900ms var(--ease-out) 150ms backwards; }
+  .js .campo--home .riga + .riga > span { animation-delay: 260ms; }
+  .js .campo__corpo > * { animation: sale 700ms var(--ease-out) 420ms backwards; }
+  .js .campo__corpo > :nth-child(2) { animation-delay: 500ms; }
+  .js .campo__corpo > :nth-child(3) { animation-delay: 580ms; }
+  .js .campo--home .campo__schermate { animation: sale-lenta 1000ms var(--ease-out) 300ms backwards; }
+
+  /* Pagine progetto: testo del campo in ordine, e le due schermate che si posano inclinate a cavallo del bordo */
+  .js :is(.progetto-campo__testo, .prendinota-campo__testo) > * { animation: sale 700ms var(--ease-out) 100ms backwards; }
+  .js :is(.progetto-campo__testo, .prendinota-campo__testo) > :nth-child(2) { animation-delay: 180ms; }
+  .js :is(.progetto-campo__testo, .prendinota-campo__testo) > :nth-child(3) { animation-delay: 260ms; }
+  .js :is(.progetto-campo__testo, .prendinota-campo__testo) > :nth-child(4) { animation-delay: 340ms; }
+  .js .duo .cornice-telefono { animation: posa 900ms var(--ease-out) 250ms backwards; }
+  .js .duo .cornice-telefono:last-child { animation-delay: 370ms; }
+  .js .video-campo { animation: sale-lenta 1000ms var(--ease-out) 250ms backwards; }
+
+  /* Home, progetti: la schermata del pannello si inclina al suo posto quando il pannello arriva */
+  .js .pannello.is-in .cornice-telefono { animation: inclina 900ms var(--ease-out) 150ms backwards; }
+
+  /* Mentoring: il pezzo della tappa scelta si apre con una tendina, nel verso di lettura */
+  .js .pezzo:not([hidden]) { animation: tendina var(--t-ui) var(--ease-out) backwards; }
+}
+
+/* Le schermate grandi salgono lente con lo scorrimento, dove il browser lo sa fare */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .js :is(.campo--home .schermata-computer, .campo--home .campo__schermate .cornice-telefono, .schermate-progetto .schermata-grande) {
+      animation: deriva linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+  }
+}
+
+@keyframes riga-su { from { transform: translateY(105%); } }
+@keyframes sale { from { opacity: 0; transform: translateY(20px); } }
+@keyframes sale-lenta { from { opacity: 0; transform: translateY(48px); } }
+@keyframes posa { from { opacity: 0; transform: translateY(64px) rotate(0deg); } }
+@keyframes inclina { from { transform: translateY(32px) rotate(0deg); } }
+@keyframes tendina { from { clip-path: inset(0 100% 0 0); } }
+@keyframes deriva { from { translate: 0 4%; } to { translate: 0 -4%; } }
