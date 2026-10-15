@@ -209,26 +209,33 @@ a { color: inherit; }
   transform-origin: 50% 0;
 }
 .schermata-computer { display: none; }
+@media (min-width: 760px) and (max-width: 1099px) {
+  /* Sul tablet la colonna accanto al telefono restava vuota: ci va la schermata da computer, con la didascalia sopra */
+  .campo--home .campo__schermate { grid-template-columns: minmax(0, 1fr) min(30vw, 240px); column-gap: 0; }
+  .campo--home .campo__schermate figcaption { grid-row: 1; align-self: end; padding-bottom: 12px; }
+  .campo--home .schermata-computer { display: block; grid-column: 1; grid-row: 2; align-self: start; }
+  .campo--home .campo__schermate .cornice-telefono { grid-column: 2; grid-row: 1 / span 2; width: auto; margin: 0 32px 0 -32px; }
+}
 
 @media (min-width: 1100px) {
-  /* Il campo riempie lo schermo: titolo in alto a tutta larghezza, testo in basso a sinistra,
-     schermate che salgono dal bordo in basso a destra. */
+  /* Titolo e testo in 5 colonne a sinistra; le schermate, elemento dominante, in 7 colonne a destra
+     accanto al titolo, e scavalcano il bordo in basso. Con il titolo più piccolo (Michele, 15/10)
+     il campo è alto quanto il suo contenuto, non quanto lo schermo. */
   .campo--home {
     --sporgenza: 120px;
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-template-rows: auto auto 1fr;
     column-gap: clamp(12px, 1.4vw, 24px);
-    min-height: 100svh;
   }
   .campo--home > * { max-width: none; margin-inline: 0; }
-  .campo--home .nav,
-  .campo--home .titolo-grande { grid-column: 1 / -1; }
+  .campo--home .nav { grid-column: 1 / -1; }
+  .campo--home .titolo-grande { grid-column: 1 / span 5; }
   .campo--home .titolo-grande { margin-top: clamp(32px, 5vh, 64px); }
   .campo--home .campo__corpo { grid-column: 1 / span 5; grid-row: 3; align-self: start; margin-top: 40px; padding-bottom: 56px; }
   .campo--home .campo__schermate {
-    grid-column: 7 / -1;
-    grid-row: 3;
+    grid-column: 6 / -1;
+    grid-row: 2 / span 2;
     display: block;
     margin-top: 48px;
     align-self: end;
@@ -243,7 +250,7 @@ a { color: inherit; }
   .schermata-computer { display: block; width: 100%; }
   .campo__schermate .cornice-telefono {
     position: absolute;
-    left: -6%;
+    left: 4%;
     bottom: calc(-1 * var(--sporgenza) - 40px);
     width: 30%;
     max-width: 260px;
@@ -425,9 +432,8 @@ main { position: relative; }
 .tappa:not(:last-child)::after {
   content: "";
   position: absolute;
-  background:
-    linear-gradient(var(--link), var(--link)) 0 0 / 100% calc(var(--percorsa) * 100%) no-repeat,
-    var(--testo);
+  /* il tratto è tutto percorso o per niente: un colore pieno, verde o scuro */
+  background: color-mix(in srgb, var(--link) calc(var(--percorsa) * 100%), var(--testo));
 }
 .tappa:not(:last-child)::before { left: 26.5px; top: 48px; bottom: 6px; width: 3px; }
 .tappa:not(:last-child)::after {
@@ -480,9 +486,7 @@ main { position: relative; }
   .js .tappa:not(:last-child) > button::after {
     content: "";
     position: absolute;
-    background:
-      linear-gradient(var(--link), var(--link)) 0 0 / calc(var(--percorsa) * 100%) 100% no-repeat,
-      var(--testo);
+    background: color-mix(in srgb, var(--link) calc(var(--percorsa) * 100%), var(--testo));
   }
   .js .tappa:not(:last-child) > button::before { top: 18.5px; left: calc(var(--larghezza) + 6px); right: 18px; height: 3px; }
   .js .tappa:not(:last-child) > button::after {
@@ -561,7 +565,7 @@ main { position: relative; }
 
 @media (min-width: 1100px) {
   .progetto-campo {
-    --telefono: 250px;
+    --telefono: 300px; /* critica di taste, giro 1: a 250 px i telefoni erano il 12% della prima schermata */
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: clamp(12px, 1.4vw, 24px);
@@ -573,7 +577,7 @@ main { position: relative; }
     align-self: end;
     padding-bottom: calc(var(--sporgenza) + 64px);
   }
-  .duo { grid-column: 8 / -1; margin-top: 48px; }
+  .duo { grid-column: 7 / -1; margin-top: 48px; }
   .duo .cornice-telefono:first-child { left: 4%; top: 56px; }
   .duo .cornice-telefono:last-child { right: 8%; }
 }
@@ -637,7 +641,7 @@ main { position: relative; }
 .prendinota-campo__testo { padding-top: clamp(40px, 7vh, 96px); }
 .prendinota-campo .frase { margin-top: 0.35em; }
 .video-campo { margin-top: 40px; margin-bottom: calc(-1 * var(--sporgenza)); }
-.video-campo figcaption { margin-top: 10px; color: var(--secondario); }
+.video-campo figcaption { max-width: 34ch; margin-bottom: 12px; color: var(--campo-secondario); } /* sopra il video, sul verde come nella home */
 .prendinota-campo + main > .sezione:first-child { padding-top: calc(var(--spazio-sezione) + clamp(140px, 22vw, 300px)); }
 @media (min-width: 1100px) {
   .campo > .video-campo { max-width: calc(100% * 8 / 12); margin-inline: 0; }
