@@ -803,3 +803,83 @@ main { position: relative; }
 @keyframes inclina { from { transform: translateY(32px) rotate(0deg); } }
 @keyframes tendina { from { clip-path: inset(0 100% 0 0); } }
 @keyframes deriva { from { translate: 0 4%; } to { translate: 0 -4%; } }
+
+/* ===== PrendiNota: il token e il tavolo (spec §7.3). Solo con lo script e il movimento consentito:
+   altrimenti resta la lista statica, ogni tappa con il suo diagramma sotto. ===== */
+.token { display: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .tappe-pn { position: relative; }
+  .js .tappe-pn .simbolo { position: relative; z-index: 1; transition: background-color 300ms ease; }
+  /* il flusso si colora di verde fino al token */
+  .js .tappe-pn::after {
+    content: "";
+    position: absolute;
+    left: 26.5px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--link);
+    transform: scaleY(var(--avanzamento, 0));
+    transform-origin: top;
+    transition: transform 700ms var(--ease-out);
+  }
+  /* il pallino che lo percorre */
+  .js .tappe-pn .token {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--link);
+    opacity: 0;
+    transform: translate(calc(var(--token-x, 28px) - 9px), calc(var(--token-y, 20px) - 9px));
+    transition: transform 700ms var(--ease-out), opacity 300ms ease;
+  }
+  .js .tappe-pn.in-cammino .token { opacity: 1; }
+  /* la tappa raggiunta si accende */
+  .js .tappa-pn.is-raggiunta > .simbolo { background: var(--campo); }
+  /* il diagramma compare con una tendina da sinistra, nel verso di lettura */
+  .js .tappa-pn > :is(.diagramma, .app-schermate) { transition: clip-path 800ms var(--ease-out), opacity 600ms var(--ease-out), transform 800ms var(--ease-out); }
+  .js .tappa-pn:not(.is-raggiunta) > :is(.diagramma, .app-schermate) { clip-path: inset(0 100% 0 0); }
+}
+
+/* Il tavolo, solo su computer: le tappe scorrono a sinistra, i diagrammi si posano uno sopra
+   l'altro su un piano fermo a destra, leggermente ruotati. Le figure stanno ferme (sticky)
+   rispetto a tutta la lista, perché le tappe qui non fanno scatola (display: contents). */
+@media (min-width: 1100px) and (prefers-reduced-motion: no-preference) {
+  .js [data-tavolo] .tappe-pn {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 4fr) minmax(0, 7fr);
+    column-gap: clamp(16px, 2vw, 32px);
+    align-items: start;
+  }
+  .js [data-tavolo] .tappa-pn { display: contents; }
+  .js [data-tavolo] .tappa-pn::before, .js [data-tavolo] .tappa-pn::after { content: none; }
+  .js [data-tavolo] .tappe-pn::before {
+    content: "";
+    position: absolute;
+    left: 26.5px;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--testo);
+  }
+  .js [data-tavolo] .tappa-pn > .simbolo { grid-column: 1; grid-row: auto; } /* nella lista statica è nella riga 1 della tappa */
+  .js [data-tavolo] .tappa-pn > .tappa-pn__nome,
+  .js [data-tavolo] .tappa-pn > .tappa-pn__riga { grid-column: 2; }
+  .js [data-tavolo] .tappa-pn > .tappa-pn__riga { margin-bottom: 40vh; }
+  .js [data-tavolo] .tappa-pn > :is(.diagramma, .app-schermate) {
+    grid-column: 3;
+    position: sticky;
+    top: 12vh;
+    justify-self: center;
+    margin-top: -56px;
+  }
+  .js [data-tavolo] .tappa-pn:nth-child(odd) > :is(.diagramma, .app-schermate) { rotate: -1.5deg; }
+  .js [data-tavolo] .tappa-pn:nth-child(even) > :is(.diagramma, .app-schermate) { rotate: 1.2deg; }
+  .js [data-tavolo] .tappa-pn > .diagramma--alto { max-width: 340px; }
+  .js [data-tavolo] .tappa-pn > .app-schermate { width: 100%; padding: 16px; background: var(--fondo); }
+}

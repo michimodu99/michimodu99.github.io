@@ -49,8 +49,41 @@ function avviaPercorso(ol) {
   apri(pulsanti[0]);
 }
 
-// Il token che percorre le tappe di PrendiNota (Task 12).
-function avviaToken(ol) {}
+// Il token che percorre le tappe di PrendiNota: una tappa è raggiunta quando il suo titolo
+// supera la metà dello schermo; il pallino va sul simbolo dell'ultima raggiunta e il flusso
+// si colora fin lì (--avanzamento, da 0 a 1). Niente ascolto dello scorrimento: un osservatore.
+function avviaToken(ol) {
+  if (movimentoRidotto || !('IntersectionObserver' in window)) return;
+  const tappe = [...ol.children];
+  const token = document.createElement('span');
+  token.className = 'token';
+  token.setAttribute('aria-hidden', 'true');
+  tappe[0].append(token); // dentro una <ol> solo <li>; la prima tappa parte dall'angolo della lista
+  const sposta = () => {
+    const raggiunte = tappe.filter((li) => li.classList.contains('is-raggiunta'));
+    const ultima = raggiunte.at(-1);
+    ol.classList.toggle('in-cammino', Boolean(ultima));
+    if (!ultima) { ol.style.setProperty('--avanzamento', 0); return; }
+    const base = ol.getBoundingClientRect();
+    const s = ultima.querySelector('.simbolo').getBoundingClientRect();
+    const y = s.top + s.height / 2 - base.top;
+    ol.style.setProperty('--token-x', `${s.left + s.width / 2 - base.left}px`);
+    ol.style.setProperty('--token-y', `${y}px`);
+    ol.style.setProperty('--avanzamento', (y / base.height).toFixed(4));
+  };
+  // A ogni scatto si ricontano tutte le tappe: uno scorrimento a salti può portare un titolo
+  // sopra lo schermo senza che l'osservatore lo veda passare dalla metà.
+  const aggiorna = () => {
+    for (const li of tappe) {
+      li.classList.toggle('is-raggiunta', li.querySelector('.tappa-pn__nome').getBoundingClientRect().top < innerHeight / 2);
+    }
+    sposta();
+  };
+  const meta = new IntersectionObserver(aggiorna, { rootMargin: '0px 0px -50% 0px' });
+  tappe.forEach((li) => meta.observe(li.querySelector('.tappa-pn__nome')));
+  new IntersectionObserver(aggiorna, { threshold: [0, 0.05, 0.1, 0.15, 0.2, 0.3] }).observe(ol); // la lista è alta più schermi: rapporti piccoli
+  addEventListener('resize', sposta);
+}
 
 // I video partono quando se ne vede almeno metà e si fermano quando escono.
 // Con il movimento ridotto non partono mai: resta la copertina con i comandi.
