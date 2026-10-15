@@ -204,7 +204,7 @@ a { color: inherit; }
   grid-column: 2;
   grid-row: 1;
   width: min(50vw, 220px);
-  margin-right: 14px;
+  margin-right: 30px; /* inclinata esce di lato: con 14 px sforava di 12 px a 390 */
   transform: rotate(-6deg);
   transform-origin: 50% 0;
 }
@@ -630,4 +630,80 @@ main { position: relative; }
 .sezione > :where(.numeri, .progetto-corpo__frase, .strumenti) {
   margin-left: max(0px, (100% - var(--larghezza-massima)) / 2);
   margin-right: auto;
+}
+
+/* PrendiNota: il video della prenotazione a cavallo del bordo del campo */
+.prendinota-campo { --sporgenza: clamp(140px, 22vw, 300px); }
+.prendinota-campo__testo { padding-top: clamp(40px, 7vh, 96px); }
+.prendinota-campo .frase { margin-top: 0.35em; }
+.video-campo { margin-top: 40px; margin-bottom: calc(-1 * var(--sporgenza)); }
+.video-campo figcaption { margin-top: 10px; color: var(--secondario); }
+.prendinota-campo + main > .sezione:first-child { padding-top: calc(var(--spazio-sezione) + clamp(140px, 22vw, 300px)); }
+@media (min-width: 1100px) {
+  .campo > .video-campo { max-width: calc(100% * 8 / 12); margin-inline: 0; }
+}
+
+/* Dal processo al codice: sei tappe BPMN, ognuna con il suo diagramma (statica: il token arriva dopo) */
+.tappe-pn { margin-top: clamp(40px, 5vw, 80px); }
+.tappa-pn {
+  --larghezza: 40px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 16px;
+  padding-bottom: 72px;
+}
+.tappa-pn > .simbolo { grid-column: 1; grid-row: 1; }
+.tappa-pn > :not(.simbolo) { grid-column: 2; }
+.tappa-pn__nome {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  font-size: var(--t-frase);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+.tappa-pn__riga { max-width: 60ch; margin-top: 8px; }
+.tappa-pn .diagramma, .app-schermate { margin-top: 24px; }
+.tappa-pn:not(:last-child)::before,
+.tappa-pn:not(:last-child)::after { content: ""; position: absolute; background: var(--testo); }
+.tappa-pn:not(:last-child)::before { left: 26.5px; top: 44px; bottom: 16px; width: 3px; }
+.tappa-pn:not(:last-child)::after {
+  left: 22px;
+  bottom: 2px;
+  width: 12px;
+  height: 14px;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 14'%3E%3Cpath d='M0 0h12L6 14z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 14'%3E%3Cpath d='M0 0h12L6 14z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.diagramma a { display: block; }
+.diagramma--largo { max-width: 1100px; }
+.diagramma--quadro { max-width: 720px; }
+.diagramma--alto { max-width: 420px; }
+.app-schermate { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; max-width: 880px; align-items: start; }
+.app-schermate .cornice-telefono { width: 100%; }
+@media (min-width: 1100px) {
+  .app-schermate { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Il risultato e i due inviti */
+.risultato__corpo { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; align-items: center; }
+.risultato__voto { font-size: var(--t-sezione); font-weight: 700; letter-spacing: -0.025em; line-height: 1; }
+.risultato .libretto { max-width: min(100%, 760px); }
+.inviti { display: grid; gap: clamp(12px, 1.4vw, 24px); }
+.invito {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: clamp(20px, 2.4vw, 40px);
+  background: var(--superficie);
+}
+.invito__testo { font-size: var(--t-frase); font-weight: 600; line-height: 1.2; }
+@media (min-width: 1100px) {
+  .risultato__corpo { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 1.4vw, 24px); }
+  .risultato__voto { grid-column: 1 / span 6; }
+  .risultato .libretto { grid-column: 7 / span 6; }
+  .inviti { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }

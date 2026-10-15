@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PrendiNota, Michele Modugno</title>
+<meta name="description" content="Prenotare una sala prove, dal processo al codice: il mio progetto d’esame di Sistemi Informativi, 30 e lode. BPMN, casi d’uso, ER, stati, classi e l’app.">
+<link rel="canonical" href="https://michimodu99.github.io/progetti/prendinota/">
+<link rel="preload" href="/fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/sito.css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script>document.documentElement.classList.add('js')</script>
+<script src="/js/sito.js" defer></script>
+</head>
+<body>
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+
+<header class="campo prendinota-campo">
+  <nav class="nav" aria-label="Principale">
+    <a class="nav__nome" href="/">Michele Modugno</a>
+    <ul class="nav__voci">
+      <li class="nav__secondaria"><a href="/#progetti">Progetti</a></li>
+      <li class="nav__secondaria"><a href="/#mentoring">Mentoring</a></li>
+      <li><a class="nav__azione" href="#contatti">Scrivimi</a></li>
+    </ul>
+  </nav>
+
+  <div class="prendinota-campo__testo">
+    <h1 class="titolo-grande">PrendiNota</h1>
+    <p class="frase">Prenotare una sala prove, dal processo al codice.</p>
+    <p class="progetto-campo__stato">Il mio progetto d’esame di Sistemi Informativi, A.A. 2025/26: 30 e lode.</p>
+  </div>
+
+  <figure class="video-campo">
+    <video class="schermata-grande" data-auto muted loop playsinline preload="none" width="1280" height="800"
+      poster="/video/prendinota-prenotazione-copertina.webp"
+      aria-label="Una prenotazione su PrendiNota da computer: scelta dello studio e della sala, orario, pagamento di prova e ricevuta">
+      <source src="/video/prendinota-prenotazione.mp4" type="video/mp4">
+    </video>
+    <figcaption class="piccolo">Una prenotazione dall’inizio alla fine, 34 secondi. Dati di esempio, pagamento di prova.</figcaption>
+  </figure>
+</header>
+
+<main id="contenuto">
+  <section class="sezione" aria-labelledby="titolo-processo" data-tavolo>
+    <h2 id="titolo-processo" class="titolo-sezione lineetta">Dal processo al codice</h2>
+    <ol class="tappe-pn" data-token>
+    <li class="tappa-pn tappa--inizio">
+      <span class="simbolo" aria-hidden="true"></span>
+      <h3 class="tappa-pn__nome">Il processo</h3>
+      <p class="tappa-pn__riga">Chi fa cosa tra musicista, sistema e studio, dalla ricerca al check-in.</p>
+      <figure class="diagramma diagramma--largo">
+        <a href="/img/prendinota/bpmn-prenotazione.webp">
+          <img src="/img/prendinota/bpmn-prenotazione-anteprima.webp" width="1800" height="636" loading="lazy"
+            alt="Il BPMN della prenotazione: corsie di musicista, sistema e studio, dalla ricerca dello slot al pagamento e al check-in">
+          <span class="diagramma__zoom">Ingrandisci</span>
+        </a>
+      </figure>
+    </li>
+    <li class="tappa-pn tappa--attivita">
+      <span class="simbolo" aria-hidden="true"></span>
+      <h3 class="tappa-pn__nome">Chi la usa</h3>
+      <p class="tappa-pn__riga">Quattro attori: ospite, musicista, studio e amministratore.</p>
+      <figure class="diagramma diagramma--quadro">
+        <a href="/img/prendinota/casi-uso-musicista.webp">
+          <img src="/img/prendinota/casi-uso-musicista-anteprima.webp" width="1800" height="1675" loading="lazy"
+            alt="Il diagramma dei casi d’uso del musicista: dal catalogo degli studi alla prenotazione, al pagamento con Stripe o con il saldo, alla ricevuta con QR e alla recensione">
+          <span class="diagramma__zoom">Ingrandisci</span>
+        </a>
+      </figure>
+    </li>
+    <li class="tappa-pn tappa--attivita">
+      <span class="simbolo" aria-hidden="true"></span>
+      <h3 class="tappa-pn__nome">I dati</h3>
+      <p class="tappa-pn__riga">14 tabelle e 5 trigger: le regole valgono anche se il codice se ne dimentica.</p>
+      <figure class="diagramma diagramma--quadro">
+        <a href="/img/prendinota/er.webp">
+          <img src="/img/prendinota/er-anteprima.webp" width="1800" height="1431" loading="lazy"
+            alt="Il modello ER di PrendiNota: utenti, studi, sale, prenotazioni, pagamenti e recensioni">
+          <span class="diagramma__zoom">Ingrandisci</span>
+        </a>
+      </figure>
+    </li>
+    <li class="tappa-pn tappa--attivita">
+      <span class="simbolo" aria-hidden="true"></span>
+      <h3 class="tappa-pn__nome">La vita di una prenotazione</h3>
+      <p class="tappa-pn__riga">Uno slot non pagato si libera da solo dopo 15 minuti.</p>
+      <figure class="diagramma diagramma--alto">
+        <a href="/img/prendinota/stati-prenotazione.webp">
+          <img src="/img/prendinota/stati-prenotazione-anteprima.webp" width="921" height="1800" loading="lazy"
+            alt="Il diagramma di stato della prenotazione: in attesa di pagamento, confermata, completata con il check-in, annullata se non pagata entro 15 minuti, cancellata con rimborso o con penale">
+          <span class="diagramma__zoom">Ingrandisci</span>
+        </a>
+      </figure>
+    </li>
+    <li class="tappa-pn tappa--attivita">
+      <span class="simbolo" aria-hidden="true"></span>
+      <h3 class="tappa-pn__nome">Il codice</h3>
+      <p class="tappa-pn__riga">CodeIgniter 4 con il pattern MVC.</p>
+      <figure class="diagramma diagramma--quadro">
+        <a href="/img/prendinota/classi.webp">
+          <img src="/img/prendinota/classi-anteprima.webp" width="1800" height="1220" loading="lazy"
+            alt="Il diagramma delle classi di PrendiNota: modelli, controller e le loro relazioni">
+          <span class="diagramma__zoom">Ingrandisci</span>
+        </a>
+      </figure>
+    </li>
+    <li class="tappa-pn tappa--fine">
+      <span class="simbolo" aria-hidden="true"></span>
+      <h3 class="tappa-pn__nome">L’app</h3>
+      <p class="tappa-pn__riga">Mappa degli studi, orari liberi, pagamento, ricevuta con QR, check-in.</p>
+      <div class="app-schermate">
+        <img class="cornice-telefono" src="/img/prendinota/telefono-catalogo-390.webp"
+          srcset="/img/prendinota/telefono-catalogo-390.webp 390w, /img/prendinota/telefono-catalogo-780.webp 780w"
+          sizes="(min-width: 1100px) 210px, 44vw" width="780" height="1688" loading="lazy"
+          alt="Il catalogo degli studi della provincia di Bari, con la ricerca per nome e per comune">
+        <img class="cornice-telefono" src="/img/prendinota/telefono-scelta-orario-390.webp"
+          srcset="/img/prendinota/telefono-scelta-orario-390.webp 390w, /img/prendinota/telefono-scelta-orario-780.webp 780w"
+          sizes="(min-width: 1100px) 210px, 44vw" width="780" height="1688" loading="lazy"
+          alt="La scelta dell’orario per la Sala Jazz: data, fasce libere e riepilogo del prezzo">
+        <img class="cornice-telefono" src="/img/prendinota/telefono-ricevuta-qr-390.webp"
+          srcset="/img/prendinota/telefono-ricevuta-qr-390.webp 390w, /img/prendinota/telefono-ricevuta-qr-780.webp 780w"
+          sizes="(min-width: 1100px) 210px, 44vw" width="780" height="1688" loading="lazy"
+          alt="La ricevuta di una prenotazione confermata, con il codice QR per il check-in">
+        <img class="cornice-telefono" src="/img/prendinota/telefono-checkin-390.webp"
+          srcset="/img/prendinota/telefono-checkin-390.webp 390w, /img/prendinota/telefono-checkin-684.webp 684w"
+          sizes="(min-width: 1100px) 210px, 44vw" width="684" height="728" loading="lazy"
+          alt="Il check-in fatto dallo studio: musicista, sala e orario, con la mail per la recensione">
+      </div>
+    </li>
+    </ol>
+    <p class="strumenti piccolo">PHP 8.2, CodeIgniter 4, PostgreSQL 17, PL/pgSQL, JavaScript, Leaflet, Stripe</p>
+  </section>
+
+  <section class="sezione risultato" aria-label="Il risultato">
+    <div class="risultato__corpo">
+      <p class="risultato__voto">30 e lode</p>
+      <img class="libretto" src="/img/libretto/libretto-30-lode.webp" width="1869" height="291" loading="lazy"
+        alt="Estratto del libretto: Sistemi Informativi, anno accademico 2025/26, voto 30 e lode">
+    </div>
+  </section>
+
+  <section class="sezione" aria-label="Inviti">
+    <ul class="inviti">
+      <li class="invito">
+        <p class="invito__testo">Video e demo su richiesta.</p>
+        <a class="link-forte" href="mailto:michelemodugno99@gmail.com?subject=PrendiNota%3A%20video%20e%20demo">Chiedimeli per email</a>
+      </li>
+      <li class="invito">
+        <p class="invito__testo">Stai preparando Sistemi Informativi?</p>
+        <a class="link-forte" href="https://wa.me/393209552840?text=Ciao%20Michele%2C%20ho%20visto%20il%20tuo%20sito.%20Sto%20preparando%20Sistemi%20Informativi%20e%20vorrei%20fissare%20il%20primo%20incontro%20gratuito.">Parliamone su WhatsApp</a>
+      </li>
+    </ul>
+  </section>
+
+  <section class="sezione" aria-label="Prossimo progetto">
+    <a class="prossimo" href="/progetti/cucinanca/"><span class="piccolo">Prossimo progetto</span> <span class="prossimo__nome">Cucinança</span></a>
+  </section>
+</main>
+
+<footer id="contatti" class="campo chiusura">
+  <p class="chiusura__nome">Michele Modugno</p>
+  <ul class="chiusura__link">
+    <li><a class="pulsante" href="https://wa.me/393209552840?text=Ciao%20Michele%2C%20ho%20visto%20il%20tuo%20sito.">Scrivimi su WhatsApp</a></li>
+    <li><a class="link-forte" href="mailto:michelemodugno99@gmail.com">Scrivimi per email</a></li>
+    <li><a class="link-forte" href="/privacy/">Privacy</a></li>
+  </ul>
+  <p class="chiusura__firma piccolo">© 2026 Michele Modugno</p>
+</footer>
+</body>
+</html>
