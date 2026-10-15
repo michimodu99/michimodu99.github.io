@@ -112,7 +112,74 @@
       </li>
     </ul>
   </section>
-  <section id="mentoring" class="sezione" aria-label="Mentoring"></section>
+  <section id="mentoring" class="sezione mentoring" aria-labelledby="titolo-mentoring">
+    <h2 id="titolo-mentoring" class="titolo-sezione lineetta">Mentoring per Sistemi Informativi</h2>
+    <div class="mentoring__intro">
+      <p class="frase">Ho dato Sistemi Informativi nel 2025/26. Ti accompagno a fare il tuo progetto.</p>
+      <p>Ho preso 30 e lode con PrendiNota, un progetto completo dai requisiti al codice. Nel mio anno, il 2025/26, per puntare al massimo il progetto andava strutturato in MVC. Ti aiuto a capire come si fa, e a farlo tu.</p>
+    </div>
+
+    <ol class="percorso" data-percorso aria-label="Il percorso, tappa per tappa">
+      <li class="tappa tappa--inizio">
+        <button type="button" aria-expanded="true" aria-controls="pezzo-incontro"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Primo incontro gratuito</span></button>
+        <div class="pezzo" id="pezzo-incontro">
+          <div class="nuvoletta" data-ui>
+            <p>Ciao Michele, ho visto il tuo sito. Sto preparando Sistemi Informativi e vorrei fissare il primo incontro gratuito.</p>
+          </div>
+          <p class="pezzo__riga">Si comincia così: mi scrivi e fissiamo una chiamata.</p>
+        </div>
+      </li>
+      <li class="tappa tappa--attivita">
+        <button type="button" aria-expanded="false" aria-controls="pezzo-processi"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Requisiti e processi</span></button>
+        <div class="pezzo" id="pezzo-processi">
+          <a class="diagramma" href="/img/prendinota/bpmn-prenotazione.webp">
+            <img src="/img/prendinota/bpmn-prenotazione-anteprima.webp" width="1800" height="636" loading="lazy"
+              alt="Il BPMN della prenotazione in PrendiNota: corsie di musicista, sistema e studio, dalla ricerca dello slot al check-in">
+            <span class="diagramma__zoom">Ingrandisci</span>
+          </a>
+          <p class="pezzo__riga">Il BPMN del mio progetto.</p>
+        </div>
+      </li>
+      <li class="tappa tappa--attivita">
+        <button type="button" aria-expanded="false" aria-controls="pezzo-database"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Database</span></button>
+        <div class="pezzo" id="pezzo-database">
+          <a class="diagramma" href="/img/prendinota/er.webp">
+            <img src="/img/prendinota/er-anteprima.webp" width="1800" height="1431" loading="lazy"
+              alt="Il modello ER di PrendiNota: utenti, studi, sale, prenotazioni, pagamenti e recensioni">
+            <span class="diagramma__zoom">Ingrandisci</span>
+          </a>
+          <p class="pezzo__riga">Il modello ER: 14 tabelle.</p>
+        </div>
+      </li>
+      <li class="tappa tappa--attivita">
+        <button type="button" aria-expanded="false" aria-controls="pezzo-mvc"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Architettura MVC</span></button>
+        <div class="pezzo" id="pezzo-mvc">
+          <a class="diagramma" href="/img/prendinota/classi.webp">
+            <img src="/img/prendinota/classi-anteprima.webp" width="1800" height="1220" loading="lazy"
+              alt="Il diagramma delle classi di PrendiNota: modelli, controller e le loro relazioni">
+            <span class="diagramma__zoom">Ingrandisci</span>
+          </a>
+          <p class="pezzo__riga">Le classi del mio MVC in CodeIgniter 4.</p>
+        </div>
+      </li>
+      <li class="tappa tappa--fine">
+        <button type="button" aria-expanded="false" aria-controls="pezzo-orale"><span class="simbolo" aria-hidden="true"></span><span class="tappa__nome">Relazione e orale</span></button>
+        <div class="pezzo" id="pezzo-orale">
+          <img class="libretto" src="/img/libretto/libretto-30-lode.webp" width="1869" height="291" loading="lazy"
+            alt="Estratto del libretto: Sistemi Informativi, anno accademico 2025/26, voto 30 e lode">
+          <p class="pezzo__riga">Sistemi Informativi, A.A. 2025/26: 30 e lode. Estratto dal mio libretto.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="contatti-mentoring">
+      <a class="pulsante pulsante--whatsapp" href="https://wa.me/393209552840?text=Ciao%20Michele%2C%20ho%20visto%20il%20tuo%20sito.%20Sto%20preparando%20Sistemi%20Informativi%20e%20vorrei%20fissare%20il%20primo%20incontro%20gratuito.">
+        <svg viewBox="0 0 256 256" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M187.58,144.84l-32-16a8,8,0,0,0-8,.5l-14.69,9.8a40.55,40.55,0,0,1-16-16l9.8-14.69a8,8,0,0,0,.5-8l-16-32A8,8,0,0,0,104,64a40,40,0,0,0-40,40,88.1,88.1,0,0,0,88,88,40,40,0,0,0,40-40A8,8,0,0,0,187.58,144.84ZM152,176a72.08,72.08,0,0,1-72-72A24,24,0,0,1,99.29,80.46l11.48,23L101,118a8,8,0,0,0-.73,7.51,56.47,56.47,0,0,0,30.15,30.15A8,8,0,0,0,138,155l14.61-9.74,23,11.48A24,24,0,0,1,152,176ZM128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"/></svg>
+        Scrivimi su WhatsApp
+      </a>
+      <a class="link-forte" href="mailto:michelemodugno99@gmail.com?subject=Mentoring%20Sistemi%20Informativi">oppure per email</a>
+    </div>
+  </section>
 </main>
 </body>
 </html>
