@@ -596,13 +596,21 @@ main { position: relative; }
 .progetto-corpo__frase { max-width: 60ch; margin-top: clamp(32px, 4vw, 56px); }
 .progetto-corpo__frase strong { font-weight: 700; }
 
-/* Una schermata da computer grande e dritta; accanto quella da telefono */
-.schermate-progetto { display: grid; gap: 24px; align-items: end; }
-.schermata-grande { width: 100%; border: 6px solid var(--cornice); background: #fff; }
-.schermate-progetto .cornice-telefono { width: min(60%, 260px); }
+/* Una schermata da computer grande e dritta; accanto una o due da telefono */
+.schermate-progetto {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 16px;
+  align-items: end;
+}
+.schermata-grande { grid-column: 1 / -1; width: 100%; border: 6px solid var(--cornice); background: #fff; }
+.schermate-progetto .cornice-telefono { width: 100%; }
+.schermata-grande + .cornice-telefono:last-child { grid-column: 1 / -1; width: min(60%, 260px); }
 @media (min-width: 1100px) {
-  .schermate-progetto { grid-template-columns: minmax(0, 8fr) minmax(0, 3fr); column-gap: clamp(12px, 1.4vw, 24px); }
-  .schermate-progetto .cornice-telefono { width: 100%; max-width: 280px; }
+  .schermate-progetto { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(12px, 1.4vw, 24px); }
+  .schermata-grande { grid-column: 1 / span 8; }
+  .schermate-progetto .cornice-telefono { grid-column: span 2; }
+  .schermata-grande + .cornice-telefono:last-child { grid-column: span 3; width: 100%; max-width: 280px; }
 }
 .strumenti { margin-top: 24px; color: var(--secondario); max-width: 60ch; }
 
