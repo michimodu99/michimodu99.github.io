@@ -6,6 +6,8 @@ const movimentoRidotto = matchMedia('(prefers-reduced-motion: reduce)').matches;
 // Le parti delle sezioni entrano quando arrivano sullo schermo, una volta sola.
 // Quelle che arrivano insieme si sfalsano tra loro (--n; --i è del flusso del mentoring); il CSS le nasconde solo sotto .js.
 function avviaEntrate() {
+  // Le parti si nascondono solo da qui in poi: se lo script non arriva, restano visibili.
+  document.documentElement.classList.add('entrate');
   const parti = [...document.querySelectorAll('[data-entra]')];
   const entra = (lista) => lista.forEach((el, n) => { el.style.setProperty('--n', n); el.classList.add('is-in'); });
   if (!('IntersectionObserver' in window)) { entra(parti); return; }
@@ -55,6 +57,7 @@ function avviaPercorso(ol) {
 function avviaToken(ol) {
   if (movimentoRidotto || !('IntersectionObserver' in window)) return;
   const tappe = [...ol.children];
+  ol.classList.add('token-attivo'); // la tendina dei diagrammi vale solo con il token in funzione
   const token = document.createElement('span');
   token.className = 'token';
   token.setAttribute('aria-hidden', 'true');
@@ -91,12 +94,17 @@ function avviaVideo() {
   const video = document.querySelectorAll('video[data-auto]');
   if (movimentoRidotto || !video.length || !('IntersectionObserver' in window)) return;
   const io = new IntersectionObserver((voci) => {
-    for (const v of voci) {
-      if (v.isIntersecting) v.target.play().catch(() => {});
-      else v.target.pause();
+    for (const { target: v, isIntersecting } of voci) {
+      if (isIntersecting) { if (!v.dataset.fermato) v.play().catch(() => {}); }
+      else if (!v.paused) { v.dataset.nostra = '1'; v.pause(); }
     }
   }, { threshold: 0.5 });
-  video.forEach((v) => io.observe(v));
+  video.forEach((v) => {
+    // Una pausa che non è nostra è di chi guarda: il video riparte solo se lo riavvia lui.
+    v.addEventListener('pause', () => { if (v.dataset.nostra) delete v.dataset.nostra; else v.dataset.fermato = '1'; });
+    v.addEventListener('play', () => { delete v.dataset.fermato; });
+    io.observe(v);
+  });
 }
 
 // Pulsanti: al passaggio la scritta esce in alto e una copia identica entra dal basso.

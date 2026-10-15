@@ -752,14 +752,15 @@ main { position: relative; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  /* Le parti delle sezioni entrano quando arrivano, sfalsate da --n (lo mette lo script) */
-  .js [data-entra] {
+  /* Le parti delle sezioni entrano quando arrivano, sfalsate da --n. Nascoste solo sotto .entrate,
+     che mette lo script: se sito.js non arriva, la riga js del <head> da sola non nasconde niente */
+  .entrate [data-entra] {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 600ms var(--ease-out), transform 800ms var(--ease-out);
     transition-delay: calc(var(--n, 0) * 80ms);
   }
-  .js [data-entra].is-in { opacity: 1; transform: none; }
+  .entrate [data-entra].is-in { opacity: 1; transform: none; }
 
   /* Home: il titolo sale dalla sua riga, la seconda 110 ms dopo; poi frase, testo e pulsante; le schermate salgono insieme */
   .js .campo--home .riga > span { animation: riga-su 900ms var(--ease-out) 150ms backwards; }
@@ -843,7 +844,7 @@ main { position: relative; }
   .js .tappa-pn.is-raggiunta > .simbolo { background: var(--campo); }
   /* il diagramma compare con una tendina da sinistra, nel verso di lettura */
   .js .tappa-pn > :is(.diagramma, .app-schermate) { transition: clip-path 800ms var(--ease-out), opacity 600ms var(--ease-out), transform 800ms var(--ease-out); }
-  .js .tappa-pn:not(.is-raggiunta) > :is(.diagramma, .app-schermate) { clip-path: inset(0 100% 0 0); }
+  .token-attivo .tappa-pn:not(.is-raggiunta) > :is(.diagramma, .app-schermate) { clip-path: inset(0 100% 0 0); }
 }
 
 /* Il tavolo, solo su computer: le tappe scorrono a sinistra, i diagrammi si posano uno sopra
