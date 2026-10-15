@@ -493,9 +493,8 @@ main > .sezione:first-child { padding-top: calc(var(--spazio-sezione) + 170px); 
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 12'%3E%3Cpath d='M0 0l14 6L0 12z'/%3E%3C/svg%3E") center / contain no-repeat;
   }
   .js .pezzo { grid-column: 1 / -1; margin-top: 40px; padding: 0; }
-  .js .pezzo .diagramma { width: fit-content; max-width: calc(100% * 8 / 12); }
-  .js .pezzo .diagramma img { width: auto; max-height: min(70vh, 640px); }
-  .js .pezzo .libretto { max-width: calc(100% * 8 / 12); }
+  /* Larghezza fissa: l'altezza viene dalle proporzioni dell'immagine anche prima che arrivi */
+  .js .pezzo .diagramma, .js .pezzo .libretto { max-width: calc(100% * 7 / 12); }
 }
 
 /* Contatti del mentoring */
