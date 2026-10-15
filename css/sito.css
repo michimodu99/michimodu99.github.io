@@ -254,9 +254,10 @@ a { color: inherit; }
 main { position: relative; }
 .sezione { padding: var(--spazio-sezione) var(--margine) 0; }
 .sezione > * { max-width: var(--larghezza-massima); margin-inline: auto; }
-main > .sezione:first-child { padding-top: calc(var(--spazio-sezione) + 170px); }
+/* Nella home le schermate del campo sporgono nella prima sezione */
+.campo--home + main > .sezione:first-child { padding-top: calc(var(--spazio-sezione) + 170px); }
 @media (min-width: 1100px) {
-  main > .sezione:first-child { padding-top: calc(var(--spazio-sezione) + 230px); }
+  .campo--home + main > .sezione:first-child { padding-top: calc(var(--spazio-sezione) + 230px); }
 }
 
 /* Titoli delle sezioni */
@@ -506,3 +507,45 @@ main > .sezione:first-child { padding-top: calc(var(--spazio-sezione) + 170px); 
   margin-top: clamp(40px, 5vw, 72px);
 }
 .pulsante--whatsapp { background: var(--campo); color: var(--campo-testo); }
+
+/* Chiusura: campo verde, il nome riempie la larghezza (è largo 8,19 volte la sua misura) */
+.chiusura {
+  container-type: inline-size;
+  margin-top: var(--spazio-sezione);
+  padding-top: clamp(48px, 8vh, 96px);
+  padding-bottom: 28px;
+}
+.chiusura__nome {
+  font-size: calc(min(100cqi, var(--larghezza-massima)) / 8.3);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+}
+.chiusura__link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 32px;
+  margin-top: clamp(32px, 5vw, 64px);
+}
+.chiusura__firma { margin-top: clamp(48px, 7vw, 96px); color: var(--campo-secondario); }
+
+/* Privacy: campo basso, poi il testo */
+.campo--basso {
+  display: flex;
+  flex-direction: column;
+  min-height: 40svh;
+  padding-bottom: clamp(28px, 4vw, 56px);
+}
+.campo--basso > *, .campo--intero > * { width: 100%; } /* in colonna i margini automatici li stringerebbero al centro */
+.campo--basso .titolo-grande { margin-top: auto; padding-top: 48px; }
+.testo-legale p { max-width: 60ch; }
+.testo-legale p + p { margin-top: 1em; }
+.testo-legale a { color: var(--link); text-decoration-thickness: 2px; text-underline-offset: 0.22em; }
+
+/* 404: tutto il campo, con l'evento di fine con errore del BPMN */
+.campo--intero { display: flex; flex-direction: column; min-height: 100svh; padding-bottom: 48px; }
+.errore { margin-top: auto; margin-bottom: auto; padding-top: 32px; }
+.errore__simbolo { width: clamp(120px, 22vw, 240px); height: auto; }
+.errore h1 { margin-top: 32px; }
+.errore p { margin-top: 28px; }
