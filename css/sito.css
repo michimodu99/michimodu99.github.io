@@ -26,7 +26,7 @@
   --cornice: #141517;
 
   /* Misure: cinque passi, nient'altro */
-  --t-grande: clamp(2.75rem, 14vw, 13rem);
+  --t-grande: clamp(2.5rem, 5vw, 5.5rem); /* Michele, 15/10: più piccolo, vicino alla bozza del 14/10 */
   --t-sezione: clamp(2rem, 4.6vw, 4.5rem);
   --t-frase: clamp(1.375rem, 2.3vw, 2.25rem);
   --t-testo: clamp(1.0625rem, 1.2vw, 1.1875rem);
@@ -497,16 +497,6 @@ main { position: relative; }
   /* Larghezza fissa: l'altezza viene dalle proporzioni dell'immagine anche prima che arrivi */
   .js .pezzo .diagramma, .js .pezzo .libretto { max-width: calc(100% * 7 / 12); }
 }
-
-/* Contatti del mentoring */
-.contatti-mentoring {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  margin-top: clamp(40px, 5vw, 72px);
-}
-.pulsante--whatsapp { background: var(--campo); color: var(--campo-testo); }
 
 /* Chiusura: campo verde, il nome riempie la larghezza (è largo 8,19 volte la sua misura) */
 .chiusura {
