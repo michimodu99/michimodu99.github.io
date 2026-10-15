@@ -539,3 +539,87 @@ main { position: relative; }
 .errore__simbolo { width: clamp(120px, 22vw, 240px); height: auto; }
 .errore h1 { margin-top: 32px; }
 .errore p { margin-top: 28px; }
+
+/* Freccia del pulsante principale, in SVG: il carattere del sito non contiene ↗ */
+.freccia { flex: none; width: 0.9em; height: 0.9em; }
+
+/* Pagina progetto: nome, frase, stato e pulsante nel campo; due schermate a cavallo del bordo */
+.progetto-campo { --sporgenza: 150px; --telefono: min(44vw, 210px); }
+.progetto-campo__testo { padding-top: clamp(40px, 7vh, 96px); }
+.progetto-campo .frase { margin-top: 0.35em; }
+.progetto-campo__stato { margin-top: 0.9em; max-width: 34ch; }
+.duo {
+  position: relative;
+  height: calc(var(--telefono) * 2.164 + 44px);
+  margin-top: 36px;
+  margin-bottom: calc(-1 * var(--sporgenza));
+}
+.duo .cornice-telefono { position: absolute; width: var(--telefono); }
+.duo .cornice-telefono:first-child { left: 3%; top: 32px; transform: rotate(-5deg); }
+.duo .cornice-telefono:last-child { right: 3%; top: 0; transform: rotate(4deg); }
+.progetto-campo + main > .sezione:first-child { padding-top: calc(var(--spazio-sezione) + 150px); }
+
+@media (min-width: 1100px) {
+  .progetto-campo {
+    --telefono: 250px;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(12px, 1.4vw, 24px);
+  }
+  .progetto-campo > * { max-width: none; margin-inline: 0; }
+  .progetto-campo .nav { grid-column: 1 / -1; }
+  .progetto-campo__testo {
+    grid-column: 1 / span 6;
+    align-self: end;
+    padding-bottom: calc(var(--sporgenza) + 64px);
+  }
+  .duo { grid-column: 8 / -1; margin-top: 48px; }
+  .duo .cornice-telefono:first-child { left: 4%; top: 56px; }
+  .duo .cornice-telefono:last-child { right: 8%; }
+}
+
+/* I numeri veri del progetto e la frase su come funziona */
+.numeri {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
+  gap: 24px clamp(12px, 1.4vw, 24px);
+  max-width: 1100px;
+}
+.numeri__valore {
+  display: block;
+  margin-bottom: 0.2em;
+  font-size: var(--t-sezione);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+.progetto-corpo__frase { max-width: 60ch; margin-top: clamp(32px, 4vw, 56px); }
+.progetto-corpo__frase strong { font-weight: 700; }
+
+/* Una schermata da computer grande e dritta; accanto quella da telefono */
+.schermate-progetto { display: grid; gap: 24px; align-items: end; }
+.schermata-grande { width: 100%; border: 6px solid var(--cornice); background: #fff; }
+.schermate-progetto .cornice-telefono { width: min(60%, 260px); }
+@media (min-width: 1100px) {
+  .schermate-progetto { grid-template-columns: minmax(0, 8fr) minmax(0, 3fr); column-gap: clamp(12px, 1.4vw, 24px); }
+  .schermate-progetto .cornice-telefono { width: 100%; max-width: 280px; }
+}
+.strumenti { margin-top: 24px; color: var(--secondario); max-width: 60ch; }
+
+/* Prossimo progetto: separato dallo spazio, il nome al passo dei titoli di sezione */
+.prossimo { display: inline-flex; flex-direction: column; gap: 4px; text-decoration: none; }
+.prossimo__nome {
+  font-size: var(--t-sezione);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+@media (hover: hover) {
+  .prossimo:hover .prossimo__nome { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.12em; }
+}
+
+/* I blocchi più stretti della sezione partono dal suo margine sinistro, non dal centro */
+.sezione > :where(.numeri, .progetto-corpo__frase, .strumenti) {
+  margin-left: max(0px, (100% - var(--larghezza-massima)) / 2);
+  margin-right: auto;
+}
