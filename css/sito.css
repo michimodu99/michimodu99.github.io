@@ -302,7 +302,6 @@ main { position: relative; }
 .pannello:has(a:focus-visible) { outline: 2px solid var(--testo); outline-offset: 3px; }
 .pannello__testo { position: relative; z-index: 1; max-width: 34ch; }
 .pannello__testo p { margin-top: 0.6em; }
-.pannello__nota { color: var(--secondario); }
 .pannello__invito {
   display: inline-block;
   margin-top: 1.2em;
@@ -449,7 +448,7 @@ main { position: relative; }
 .pezzo { padding: 8px 0 8px 72px; }
 .pezzo__riga { margin-top: 12px; font-size: var(--t-piccolo); color: var(--secondario); }
 /* La nuvoletta a fumetto (Michele, 15/10): piatta, con il bordo pieno dei simboli del BPMN
-   e la codina verso il flusso; sul telefono a sinistra, su computer in alto verso la tappa di inizio */
+   e la codina verso il flusso; sul telefono a sinistra, su computer in alto */
 .nuvoletta {
   position: relative;
   width: fit-content;
@@ -488,9 +487,13 @@ main { position: relative; }
 .libretto { border: 6px solid var(--cornice); background: #fff; }
 
 /* Su computer, con lo script attivo, il flusso va da sinistra a destra come un BPMN vero
-   e il pezzo si apre sotto, largo. Senza script resta la colonna del telefono. */
+   e il pezzo si apre sotto, al centro (Michele, 16/10). Tutti i pezzi stanno nella stessa cella:
+   nel passaggio da una tappa all'altra il vecchio esce e il nuovo entra scorrendo (sito.js).
+   Senza script resta la colonna del telefono. */
 @media (min-width: 1100px) {
-  .js .percorso { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  /* Righe alte quanto il contenuto anche quando l'animazione fissa l'altezza della lista:
+     altrimenti la riga delle tappe scende alla sua altezza minima e i pezzi saltano in su */
+  .js .percorso { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); grid-template-rows: max-content max-content; }
   .js .tappa { display: contents; }
   .js .tappa::before, .js .tappa::after { content: none; }
   .js .tappa > button {
@@ -516,7 +519,16 @@ main { position: relative; }
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 12'%3E%3Cpath d='M0 0l14 6L0 12z'/%3E%3C/svg%3E") center / contain no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 12'%3E%3Cpath d='M0 0l14 6L0 12z'/%3E%3C/svg%3E") center / contain no-repeat;
   }
-  .js .pezzo { grid-column: 1 / -1; margin-top: 40px; padding: 0; }
+  .js .pezzo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 40px;
+    padding: 0;
+  }
+  .js .pezzo__riga { text-align: center; }
   .js .nuvoletta { margin-top: 16px; max-width: 24em; text-wrap: pretty; }
   .js .nuvoletta::before, .js .nuvoletta::after { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
   .js .nuvoletta::before { left: 30px; top: -18px; width: 28px; height: 21px; }
@@ -525,25 +537,18 @@ main { position: relative; }
   .js .pezzo .diagramma, .js .pezzo .libretto { max-width: calc(100% * 7 / 12); }
 }
 
-/* Chiusura: campo verde, il nome riempie la larghezza (è largo 8,19 volte la sua misura) */
+/* Chiusura: campo verde con i contatti. Niente nome a tutta larghezza (Michele, 16/10:
+   era la terza volta nella pagina); il nome resta in alto e nella firma */
 .chiusura {
-  container-type: inline-size;
   margin-top: var(--spazio-sezione);
   padding-top: clamp(48px, 8vh, 96px);
   padding-bottom: 28px;
-}
-.chiusura__nome {
-  font-size: calc(min(100cqi, var(--larghezza-massima)) / 8.3);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 0.92;
 }
 .chiusura__link {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px 32px;
-  margin-top: clamp(32px, 5vw, 64px);
 }
 .chiusura__firma { margin-top: clamp(48px, 7vw, 96px); color: var(--campo-secondario); }
 
@@ -804,9 +809,6 @@ main { position: relative; }
 
   /* Home, progetti: la schermata del pannello si inclina al suo posto quando il pannello arriva */
   .js .pannello.is-in .cornice-telefono { animation: inclina 900ms var(--ease-out) 150ms backwards; }
-
-  /* Mentoring: il pezzo della tappa scelta si apre con una tendina, nel verso di lettura */
-  .js .pezzo:not([hidden]) { animation: tendina var(--t-ui) var(--ease-out) backwards; }
 }
 
 /* Le schermate grandi salgono lente con lo scorrimento, dove il browser lo sa fare */
@@ -825,7 +827,6 @@ main { position: relative; }
 @keyframes sale-lenta { from { opacity: 0; transform: translateY(48px); } }
 @keyframes posa { from { opacity: 0; transform: translateY(64px) rotate(0deg); } }
 @keyframes inclina { from { transform: translateY(32px) rotate(0deg); } }
-@keyframes tendina { from { clip-path: inset(0 100% 0 0); } }
 @keyframes deriva { from { translate: 0 4%; } to { translate: 0 -4%; } }
 
 /* ===== PrendiNota: il token e il tavolo (spec §7.3). Solo con lo script e il movimento consentito:
